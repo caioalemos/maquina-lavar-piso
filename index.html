@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inteligência de Mercado – Lavadora e Secadora de Pisos</title>
+  <style>
+    :root {
+      --blue-dark: #0d2b4e;
+      --blue-mid: #1a4a8a;
+      --blue-light: #2e7dd1;
+      --accent: #f0a500;
+      --accent-light: #fff8e6;
+      --bg: #f4f6fa;
+      --card-bg: #ffffff;
+      --text: #1e2733;
+      --text-light: #5a6475;
+      --border: #dde3ed;
+      --green: #1a7a4a;
+      --green-bg: #eaf5ee;
+      --red: #c0392b;
+      --red-bg: #fdecea;
+      --tag-bg: #e8f0fb;
+      --tag-text: #1a4a8a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-mid) 60%, var(--blue-light) 100%);
+      color: #fff;
+      padding: 48px 60px 40px;
+    }
+    header .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    header h1 {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    header p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.75);
+      max-width: 620px;
+    }
+    header .meta {
+      display: flex;
+      gap: 24px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    header .meta-item {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.9);
+    }
+    header .meta-item strong { color: #fff; display: block; font-size: 16px; }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 48px 32px; }
+
+    /* ── SECTION TITLES ── */
+    .section { margin-bottom: 56px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 14px;
+    }
+    .section-icon {
+      width: 40px; height: 40px;
+      background: var(--blue-mid);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .section-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--blue-dark);
+    }
+    .section-number {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      margin-bottom: 2px;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 16px;
+    }
+    .card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 8px;
+    }
+    .card p { color: var(--text-light); font-size: 14px; }
+
+    /* ── GRID ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    @media(max-width: 768px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      header { padding: 32px 24px; }
+      .container { padding: 32px 16px; }
+    }
+
+    /* ── STAT BOXES ── */
+    .stat-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 24px;
+      text-align: center;
+    }
+    .stat-box .stat-value {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--blue-mid);
+      line-height: 1.1;
+    }
+    .stat-box .stat-label {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-top: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .stat-box .stat-sub {
+      font-size: 11px;
+      color: #aab;
+      margin-top: 4px;
+    }
+
+    /* ── COMPETITOR TABLE ── */
+    .comp-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .comp-table th {
+      background: var(--blue-dark);
+      color: #fff;
+      padding: 12px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .comp-table th:first-child { border-radius: 8px 0 0 0; }
+    .comp-table th:last-child { border-radius: 0 8px 0 0; }
+    .comp-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .comp-table tr:last-child td { border-bottom: none; }
+    .comp-table tr:nth-child(even) td { background: #f8f9fc; }
+    .comp-table tr:hover td { background: #eef3fb; }
+    .brand-name { font-weight: 700; color: var(--blue-dark); }
+    .brand-origin { font-size: 11px; color: var(--text-light); }
+
+    /* ── TAGS ── */
+    .tag {
+      display: inline-block;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 4px;
+      padding: 2px 8px;
+      margin: 2px 2px 2px 0;
+    }
+    .tag.green { background: var(--green-bg); color: var(--green); }
+    .tag.amber { background: var(--accent-light); color: #a07000; }
+    .tag.red { background: var(--red-bg); color: var(--red); }
+
+    /* ── CERT ITEMS ── */
+    .cert-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--blue-light);
+      border-radius: 0 10px 10px 0;
+      padding: 18px 22px;
+      margin-bottom: 14px;
+    }
+    .cert-item.mandatory { border-left-color: var(--red); }
+    .cert-item.recommended { border-left-color: var(--accent); }
+    .cert-item h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cert-item p { font-size: 13.5px; color: var(--text-light); }
+
+    /* ── CUSTOMER SECTOR ── */
+    .sector-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    @media(max-width: 768px) { .sector-grid { grid-template-columns: 1fr 1fr; } }
+    .sector-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: box-shadow 0.2s;
+    }
+    .sector-card:hover { box-shadow: 0 4px 18px rgba(30,80,160,0.10); }
+    .sector-icon { font-size: 32px; margin-bottom: 10px; }
+    .sector-card h4 { font-size: 14px; font-weight: 700; color: var(--blue-dark); margin-bottom: 6px; }
+    .sector-card p { font-size: 12px; color: var(--text-light); }
+    .sector-card .priority {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      border-radius: 4px;
+      padding: 2px 7px;
+      margin-top: 8px;
+    }
+    .priority.high { background: var(--green-bg); color: var(--green); }
+    .priority.mid { background: var(--accent-light); color: #a07000; }
+
+    /* ── INSIGHT BOX ── */
+    .insight {
+      background: var(--accent-light);
+      border: 1px solid #f0d080;
+      border-radius: 10px;
+      padding: 16px 20px;
+      font-size: 13.5px;
+      color: #6b4c00;
+      margin-top: 16px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .insight::before { content: "💡"; font-size: 18px; flex-shrink: 0; }
+
+    /* ── REFERENCE ITEM ── */
+    .ref-list { list-style: none; font-size: 13px; }
+    .ref-list li {
+      padding: 7px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+    }
+    .ref-list li:last-child { border-bottom: none; }
+    .ref-num {
+      font-weight: 700;
+      color: var(--blue-light);
+      min-width: 24px;
+      font-size: 11px;
+    }
+    .ref-list a { color: var(--blue-light); text-decoration: none; word-break: break-all; }
+    .ref-list a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--blue-dark);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      margin-top: 24px;
+    }
+    footer strong { color: rgba(255,255,255,0.8); }
+
+    /* ── PRICE BADGE ── */
+    .price { font-weight: 700; color: var(--blue-mid); font-size: 15px; }
+    .price-range { font-size: 12px; color: var(--text-light); display: block; }
+
+    /* ── PRODUCT CARDS ── */
+    .prod-grid { display: grid; gap: 18px; margin-bottom: 28px; }
+    .prod-grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .prod-grid-3 { grid-template-columns: repeat(3, 1fr); }
+    @media(max-width: 900px) { .prod-grid-3 { grid-template-columns: repeat(2, 1fr); } }
+    @media(max-width: 600px) { .prod-grid-2, .prod-grid-3 { grid-template-columns: 1fr; } }
+
+    .prod-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .prod-card:hover {
+      box-shadow: 0 6px 24px rgba(30,74,138,0.13);
+      transform: translateY(-2px);
+    }
+    .prod-img-wrap {
+      height: 180px;
+      background: #f0f4fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .prod-img-wrap img {
+      max-height: 160px;
+      max-width: 90%;
+      object-fit: contain;
+    }
+    .prod-img-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      font-size: 13px;
+      font-weight: 700;
+      color: #8899bb;
+      text-align: center;
+      padding: 16px;
+      gap: 8px;
+    }
+    .prod-img-placeholder .ph-icon { font-size: 40px; opacity: 0.4; }
+    .prod-body {
+      padding: 16px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+    .prod-origin { font-size: 11px; color: var(--text-light); font-weight: 600; letter-spacing: 0.3px; }
+    .prod-model { font-size: 16px; font-weight: 800; color: var(--blue-dark); line-height: 1.2; }
+    .prod-specs { font-size: 12px; color: var(--text-light); line-height: 1.6; margin-top: 2px; flex: 1; }
+    .prod-price-box {
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .prod-price-box.green  { background: #eaf5ee; }
+    .prod-price-box.blue   { background: #e8f0fb; }
+    .prod-price-box.purple { background: #f3eeff; }
+    .prod-price-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #8899aa; }
+    .prod-price-value {
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .prod-price-value.green  { color: #1a7a4a; }
+    .prod-price-value.blue   { color: #1a4a8a; }
+    .prod-price-value.purple { color: #5c2ea8; }
+    .prod-price-note { font-size: 11px; color: #8899aa; margin-left: auto; }
+    .prod-link {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      padding: 9px 0;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .prod-link:hover { opacity: 0.8; }
+    .prod-link.green  { background: #27ae60; color: #fff; }
+    .prod-link.blue   { background: #2e7dd1; color: #fff; }
+    .prod-link.purple { background: #6c3fc5; color: #fff; }
+    .tier-header {
+      display: flex; align-items: center; gap: 12px;
+      margin: 28px 0 14px;
+    }
+    .tier-badge {
+      border-radius: 8px; padding: 6px 14px;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase; color: #fff;
+    }
+    .tier-header.blue   .tier-badge { background: #2e7dd1; }
+    .tier-header.green  .tier-badge { background: #27ae60; }
+    .tier-header.purple .tier-badge { background: #6c3fc5; }
+    .tier-title { font-size: 18px; font-weight: 800; }
+    .tier-desc {
+      border-left: 4px solid;
+      border-radius: 0 12px 12px 0;
+      padding: 14px 20px;
+      font-size: 13.5px;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header>
+  <div class="label">Inteligência de Mercado · Produto</div>
+  <h1>Lavadora e Secadora de Pisos<br>Industrial / Profissional</h1>
+  <p>Análise de mercado, competidores, perfis de clientes e certificações para comercialização no Brasil. Produto de referência: <strong>Kärcher BD 50/50 C Elétrica</strong>.</p>
+  <div class="meta">
+    <div class="meta-item"><strong>Mai/2026</strong>Data do relatório</div>
+    <div class="meta-item"><strong>Global + Brasil</strong>Escopo geográfico</div>
+    <div class="meta-item"><strong>4 Seções</strong>Contexto · Concorrência · Clientes · Certificações</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ══════════════ SEÇÃO 1 – MERCADO ══════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">📊</div>
+      <div>
+        <div class="section-number">Seção 01</div>
+        <h2>Contexto de Mercado</h2>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid-3" style="margin-bottom:24px;">
+      <div class="stat-box">
+        <div class="stat-value">US$ 5,4 bi</div>
+        <div class="stat-label">Mercado global (2025)</div>
+        <div class="stat-sub">Industrial & Commercial Floor Scrubbers</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">US$ 7,98 bi</div>
+        <div class="stat-label">Projeção global (2033)</div>
+        <div class="stat-sub">Grand View Research</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">~5% CAGR</div>
+        <div class="stat-label">Crescimento anual estimado</div>
+        <div class="stat-sub">2025–2033 · Grand View Research</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Visão Geral do Mercado Global</h3>
+      <p>O mercado global de lavadoras e secadoras de pisos industriais e comerciais é impulsionado pela crescente demanda por higienização em ambientes públicos, pela pressão de redução de mão de obra, e pelo avanço tecnológico (baterias de lítio, IoT, robótica). Segundo a <strong>Grand View Research</strong>, o mercado de floor scrubbers industriais e comerciais foi avaliado em <strong>US$ 5,4 bilhões em 2025</strong> e deve atingir <strong>US$ 7,98 bilhões até 2033</strong>, crescendo a um CAGR de aproximadamente 5% ao ano.</p>
+    </div>
+
+    <div class="card" style="margin-top:0;">
+      <h3>Brasil e América Latina</h3>
+      <p>O Brasil e a Argentina são apontados como os principais motores de crescimento do mercado de lavadoras de piso na América Latina, impulsionados pela industrialização acelerada, expansão do varejo moderno, crescimento do e-commerce e logística (galpões e DCs), e maior exigência de higienização após a pandemia de COVID-19. A <strong>Grand View Research</strong> destaca que Brasil e México lideram a adoção regional nos setores de saúde e logística, acompanhando a tendência global de substituição de mão de obra por automação de limpeza. Não há dados públicos consolidados específicos para o mercado brasileiro do segmento, mas os indicadores globais e regionais confirmam tendência positiva.</p>
+    </div>
+
+    <div class="grid-2" style="margin-top:16px;">
+      <div class="card">
+        <h3>🚀 Principais Drivers de Crescimento</h3>
+        <p style="margin-bottom:8px;">Fatores que impulsionam o mercado no Brasil:</p>
+        <ul style="list-style:disc;padding-left:18px;color:#5a6475;font-size:14px;margin-top:8px;">
+          <li>Redução de mão de obra em operações de limpeza de grande porte</li>
+          <li>Expansão do varejo moderno, e-commerce e logística (galpões e centros de distribuição)</li>
+          <li>Maior exigência de higienização pós-pandemia em ambientes públicos e corporativos</li>
+          <li>Adoção de baterias de lítio, IoT e robótica nos equipamentos</li>
+          <li>Crescimento de empresas de facilities e terceirização de limpeza</li>
+          <li>Pressão por sustentabilidade (menor consumo de água e químicos)</li>
+        </ul>
+    </div>
+    <div class="card" style="margin-top:16px;border-left:4px solid #c0392b;border-radius:0 12px 12px 0;background:var(--red-bg);">
+      <h3 style="color:#c0392b;">⚠️ Aviso sobre Dados</h3>
+      <p style="font-size:13.5px;">Os dados de mercado globais são provenientes de relatórios de pesquisa especializados (Grand View Research, FactMR, Fortune Business Insights). Dados de tamanho de mercado <strong>específicos para o Brasil</strong> no segmento de lavadoras de piso industrial <strong>não estão disponíveis publicamente</strong> — as estimativas foram derivadas de projeções regionais e dados globais. Preços indicados são baseados em varejistas online e podem variar. Para tomada de decisão estratégica, recomenda-se complementar com pesquisa primária (entrevistas com distribuidores, análise de licitações públicas e dados SECEX de importação).</p>
+    </div>
+  </div>
+  <!-- ══════════════ SEÇÃO 2 – ANÁLISE COMPETITIVA ══════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🏭</div>
+      <div>
+        <div class="section-number">Seção 02</div>
+        <h2>Análise Competitiva de Produtos</h2>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:28px;">
+      <h3>Estrutura do Mercado por Modalidade</h3>
+      <p>Os produtos foram classificados em três tiers com base na modalidade de alimentação e nível de automação — refletindo o critério de compra real das empresas de limpeza e facilities no Brasil. Tier 1 reúne modelos com cabo elétrico (menor investimento), Tier 2 agrupa modelos a bateria (maior mobilidade), e Tier 3 contempla robôs autônomos (operação sem operador).</p>
+    </div>
+
+    <!-- ── TIER 1: COM FIO ── -->
+    <div class="tier-header blue">
+      <div class="tier-badge">Tier 1 · Com Fio</div>
+      <h3 class="tier-title">🔌 Lavadoras com Cabo Elétrico</h3>
+    </div>
+    <div class="tier-desc" style="border-color:#2e7dd1;background:#eef4fd;color:#1a3d6d;">
+      <strong>Perfil:</strong> Alimentação elétrica por cabo 220V. Menor custo de entrada e manutenção simplificada. Ideal para áreas com pontos elétricos de fácil acesso e operações sem necessidade de total mobilidade.
+    </div>
+
+    <div class="prod-grid prod-grid-2">
+
+      <!-- Kärcher BD 50/50 C -->
+      <div class="prod-card">
+        <div class="prod-img-wrap">
+          <img src="https://s1.kaercher-media.com/media/image/selection/73950/d0/bd-50-50-c-classic.webp" alt="Kärcher BD 50/50 C"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="prod-img-placeholder" style="display:none"><span class="ph-icon">🧹</span>Kärcher BD 50/50 C</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-origin">🇩🇪 Kärcher · Alemanha / Via Kärcher Center Brasil</div>
+          <div class="prod-model">Kärcher BD 50/50 C</div>
+          <div class="prod-specs">500 mm · 800 W · 2.400 m²/h · Tração manual · Cabo 220V<br>Referência de mercado para entrada no segmento<br>Rede de assistência técnica nacional Kärcher</div>
+          <div class="prod-price-box blue">
+            <div>
+              <div class="prod-price-label">Menor preço encontrado</div>
+              <div class="prod-price-value blue">R$ 15.479</div>
+            </div>
+            <div class="prod-price-note">Kärcher Center Altex</div>
+          </div>
+          <a href="https://karcher-center-altex.com.br/produto/lavadora-e-secadora-de-piso-karcher-bd-50-50-c-classic-48345" target="_blank" class="prod-link blue">Ver produto →</a>
+        </div>
+      </div>
+      <!-- Artlav AL450E -->
+      <div class="prod-card">
+        <div class="prod-img-wrap">
+          <img src="https://cdn.awsli.com.br/800x800/1593/1593430/produto/105352748/7180b68a76.jpg" alt="Artlav AL450E"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="prod-img-placeholder" style="display:none"><span class="ph-icon">🧹</span>Artlav AL450E</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-origin">🇧🇷 Artlav · Brasil / Fabricação nacional</div>
+          <div class="prod-model">Artlav AL450E</div>
+          <div class="prod-specs">450 mm · disco · Cabo 220V · Tração elétrica<br>Fabricação nacional — peças e suporte imediato<br>Homologação INMETRO para o mercado brasileiro</div>
+          <div class="prod-price-box blue">
+            <div>
+              <div class="prod-price-label">Menor preço encontrado</div>
+              <div class="prod-price-value blue">R$ 17.130</div>
+            </div>
+            <div class="prod-price-note">NC Bella Distribuidora</div>
+          </div>
+          <a href="https://www.ncbelladistribuidora.com.br/lavadora-automatica-de-pisos-eletrica-disco-450-450e-artlav" target="_blank" class="prod-link blue">Ver produto →</a>
+        </div>
+      </div>
+      <!-- IPC CT50 (cabo) -->
+      <div class="prod-card">
+        <div class="prod-img-wrap">
+          <img src="https://ipcbrasil.vteximg.com.br/arquivos/ids/155859/1_ct50.jpg?v=638869917715070000" alt="IPC CT50 (cabo)"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="prod-img-placeholder" style="display:none"><span class="ph-icon">🧹</span>IPC CT50 (cabo)</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-origin">🇮🇹 IPC · Itália / IPC Brasil — distribuidor oficial</div>
+          <div class="prod-model">IPC CT50 (cabo)</div>
+          <div class="prod-specs">500 mm · 950 W · 2.200 m²/h · Cabo 220V<br>Marca com operação direta no Brasil via IPC Brasil<br>Suporte técnico local e peças em estoque</div>
+          <div class="prod-price-box blue">
+            <div>
+              <div class="prod-price-label">Menor preço encontrado</div>
+              <div class="prod-price-value blue">R$ 16.474</div>
+            </div>
+            <div class="prod-price-note">IPC Brasil</div>
+          </div>
+          <a href="https://loja.ipcbrasil.com.br/lavadora-de-piso-ct50-cabo" target="_blank" class="prod-link blue">Ver produto →</a>
+        </div>
+      </div>
+      <!-- Lavor Free Evo 50E -->
+      <div class="prod-card">
+        <div class="prod-img-wrap">
+          <img src="https://img.lojadomecanico.com.br/1024/46/448/608387/1727778777522.JPG" alt="Lavor Free Evo 50E"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="prod-img-placeholder" style="display:none"><span class="ph-icon">🧹</span>Lavor Free Evo 50E</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-origin">🇮🇹 Lavor · Itália / Importação</div>
+          <div class="prod-model">Lavor Free Evo 50E</div>
+          <div class="prod-specs">500 mm · 800 W · 2.000 m²/h · Tanque 45+50 L<br>Elétrica a cabo 220V · Painel analógico Soft-touch<br>Disponível via Loja do Mecânico no Brasil</div>
+          <div class="prod-price-box blue">
+            <div>
+              <div class="prod-price-label">Menor preço encontrado</div>
+              <div class="prod-price-value blue">R$ 13.601</div>
+            </div>
+            <div class="prod-price-note">Loja do Mecânico</div>
+          </div>
+          <a href="https://www.lojadomecanico.com.br/produto/608387/22/247/lavadora-e-secadora-de-pisos-free-evo-50e-eletrica-800mm-220v-lavor-b85270003" target="_blank" class="prod-link blue">Ver produto →</a>
+        </div>
+      </div>
+
+    </div><!-- /prod-grid T1 -->
+
+    <!-- ── TIER 2: BATERIA ── -->
+    <div class="tier-header green">
+      <div class="tier-badge">Tier 2 · Sem Fio</div>
+      <h3 class="tier-title">🔋 Lavadoras a Bateria</h3>
+    </div>
+    <div class="tier-desc" style="border-color:#27ae60;background:#edfbf3;color:#1a5c35;">
+      <strong>Perfil:</strong> Alimentação por bateria 24V. Liberdade de movimento sem restrição de cabo. Maior produtividade em operações de médio e grande porte. Custo de aquisição mais alto, justificado pela autonomia operacional.
+    </div>
+
+    <div class="prod-grid prod-grid-3">
+
+      <!-- Nilfisk SC500 REV -->
+      <div class="prod-card">
+        <div class="prod-img-wrap">
+          <img src="https://nilfisk.b-cdn.net/wp-content/uploads/2021/03/sc500_biblioteca.png" alt="Nilfisk SC500 REV"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="prod-img-placeholder" style="display:none"><span class="ph-icon">🧹</span>Nilfisk SC500 REV</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-origin">🇩🇰 Nilfisk · Dinamarca / Distribuidores no Brasil</div>
+          <div class="prod-model">Nilfisk SC500 REV</div>
+          <div class="prod-specs">Tecnologia orbital exclusiva (sem marcas espirais)<br>500 mm largura · Limpeza profunda em uma passagem<br>Disponível via distribuidores no Brasil</div>
+          <div class="prod-price-box green">
+            <div>
+              <div class="prod-price-label">Menor preço encontrado</div>
+              <div class="prod-price-value green">R$ 50.095</div>
+            </div>
+            <div class="prod-price-note">Nilfisk Brasil</div>
+          </div>
+          <a href="https://nilfisk.com.br/lavadoras-de-pisos/lavadora-de-pisos-compacta-sc500/" target="_blank" class="prod-link green">Ver produto →</a>
+        </div>
+      </div>
+      <!-- IPC CT50 (bateria) -->
+      <div class="prod-card">
+        <div class="prod-img-wrap">
+          <img src="https://ipcbrasil.vteximg.com.br/arquivos/ids/155860/1_ct50.jpg?v=638869918171970000" alt="IPC CT50 (bateria)"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="prod-img-placeholder" style="display:none"><span class="ph-icon">🧹</span>IPC CT50 (bateria)</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-origin">🇮🇹 IPC · Itália / IPC Brasil — distribuidor oficial</div>
+          <div class="prod-model">IPC CT50 (bateria)</div>
+          <div class="prod-specs">500 mm · 24V · 2.200 m²/h · Bateria<br>Mesmo modelo do Tier 1, versão autônoma a bateria<br>Suporte técnico local IPC Brasil</div>
+          <div class="prod-price-box green">
+            <div>
+              <div class="prod-price-label">Menor preço encontrado</div>
+              <div class="prod-price-value green">R$ 23.336</div>
+            </div>
+            <div class="prod-price-note">IPC Brasil</div>
+          </div>
+          <a href="https://loja.ipcbrasil.com.br/lavadora-de-piso-ct50-bateria" target="_blank" class="prod-link green">Ver produto →</a>
+        </div>
+      </div>
+      <!-- Lavor Free Evo 50B -->
+      <div class="prod-card">
+        <div class="prod-img-wrap">
+          <img src="https://img.lojadomecanico.com.br/1024/46/448/608386/1727778742111.JPG" alt="Lavor Free Evo 50B"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="prod-img-placeholder" style="display:none"><span class="ph-icon">🧹</span>Lavor Free Evo 50B</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-origin">🇮🇹 Lavor · Itália / Importação</div>
+          <div class="prod-model">Lavor Free Evo 50B</div>
+          <div class="prod-specs">500 mm · 24V · 2.000 m²/h · Tanque 45+50 L<br>Bateria · Autonomia até 3h · Painel analógico Soft-touch<br>Disponível via Loja do Mecânico no Brasil</div>
+          <div class="prod-price-box green">
+            <div>
+              <div class="prod-price-label">Menor preço encontrado</div>
+              <div class="prod-price-value green">R$ 24.299</div>
+            </div>
+            <div class="prod-price-note">Loja do Mecânico</div>
+          </div>
+          <a href="https://www.lojadomecanico.com.br/produto/608386/22/247/lavadora-e-secadora-de-pisos-free-evo-45e-450mm-800w-220v-lavor-b85270004" target="_blank" class="prod-link green">Ver produto →</a>
+        </div>
+      </div>
+      <!-- Artlav AL450 Bateria -->
+      <div class="prod-card">
+        <div class="prod-img-wrap">
+          <img src="https://cdn.awsli.com.br/800x800/1593/1593430/produto/103391967/3233643a1d.jpg" alt="Artlav AL450 Bateria"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="prod-img-placeholder" style="display:none"><span class="ph-icon">🧹</span>Artlav AL450 Bateria</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-origin">🇧🇷 Artlav · Brasil / Fabricação nacional</div>
+          <div class="prod-model">Artlav AL450 Bateria</div>
+          <div class="prod-specs">510 mm · 1.650 m²/h · Tanque 45+50 L · 24V 130Ah<br>Inclui bateria + carregador + entrega técnica<br>Fabricação nacional, suporte técnico facilitado</div>
+          <div class="prod-price-box green">
+            <div>
+              <div class="prod-price-label">Menor preço encontrado</div>
+              <div class="prod-price-value green">R$ 30.511</div>
+            </div>
+            <div class="prod-price-note">NC Bella Distribuidora</div>
+          </div>
+          <a href="https://www.ncbelladistribuidora.com.br/lavadora-de-piso-automatica-a-bateria-disco-510-al-450-artlav" target="_blank" class="prod-link green">Ver produto →</a>
+        </div>
+      </div>
+
+
+      <!-- SAS Noblelift LPP530 -->
+      <div class="prod-card">
+        <div class="prod-img-wrap">
+          <img src="https://le-cdn.hibuwebsites.com/16e5049557b64f3284d2e5720f46eb41/dms3rep/multi/opt/Noblelift-NB530-Electric-Scrubbers-Main-Sunrise-1920w.jpg" alt="SAS Noblelift LPP530"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="prod-img-placeholder" style="display:none"><span class="ph-icon">🧹</span>SAS Noblelift LPP530</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-origin">🇧🇷 SAS Noblelift · Gaspar, SC / MQ Empilhadeiras — Uberlândia, MG</div>
+          <div class="prod-model">LPP530</div>
+          <div class="prod-specs">530 mm largura · 1.800 m²/h · Tanque 50+50 L<br>Bateria Lítio 24V/100Ah inclusa · Tração manual · Op. de pé<br>Autonomia ~3–4 h · Pressão escova ajustável</div>
+          <div class="prod-price-box green">
+            <div>
+              <div class="prod-price-label">Preço especial (MQ Empilhadeiras)</div>
+              <div class="prod-price-value green">R$ 19.790,76</div>
+            </div>
+            <div class="prod-price-note">Tabela R$ 22.489,50</div>
+          </div>
+          <a href="https://mqempilhadeiras.com.br" target="_blank" class="prod-link green">Ver produto →</a>
+        </div>
+      </div>
+
+        </div><!-- /prod-grid T2 -->
+
+    <!-- ── TIER 3: AUTÔNOMOS ── -->
+    <div class="tier-header purple">
+      <div class="tier-badge">Tier 3 · Autônomos</div>
+      <h3 class="tier-title">🤖 Robôs de Limpeza Autônomos</h3>
+    </div>
+    <div class="tier-desc" style="border-color:#6c3fc5;background:#f5f0fb;color:#4a2a8a;">
+      <strong>Perfil:</strong> Sem operador humano durante a limpeza. LiDAR, câmeras 3D, IA para navegação e desvio de obstáculos. Docking station autônoma (recarga, troca de água). ROI estimado em 18–36 meses em operações intensivas.
+    </div>
+
+    <div class="prod-grid prod-grid-3">
+
+      <!-- Kärcher KIRA B 50 -->
+      <div class="prod-card">
+        <div class="prod-img-wrap">
+          <img src="https://s1.kaercher-media.com/media/image/selection/157262/d0/lavadora-e-secadora-de-piso-robo-kira-b-50-kaercher.webp" alt="Kärcher KIRA B 50"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="prod-img-placeholder" style="display:none"><span class="ph-icon">🤖</span>Kärcher KIRA B 50</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-origin">🇩🇪 Kärcher · Alemanha / Kärcher Brasil — Vinhedo, SP</div>
+          <div class="prod-model">Kärcher KIRA B 50</div>
+          <div class="prod-specs">550 mm largura · 2.600 m²/h · Tanque 55+55 L<br>Li-Ion 24V/160Ah · Docking Station · Visão 360°<br>100% autônoma · Portal web + app mobile</div>
+          <div class="prod-price-box purple">
+            <div>
+              <div class="prod-price-label">Valor de compra (proposta Kärcher Brasil)</div>
+              <div class="prod-price-value purple">R$ 590.000</div>
+            </div>
+            <div class="prod-price-note">Locação + KIRA Care Plus: R$ 16.990/mês (60 meses)</div>
+          </div>
+          <a href="https://karcher-center-altex.com.br/produto/lavadora-e-secadora-de-piso-autonoma-karcher-kira-b-50-86925" target="_blank" class="prod-link purple">Ver produto →</a>
+        </div>
+      </div>
+      <!-- Pudu CC1 -->
+      <div class="prod-card">
+        <div class="prod-img-wrap">
+          <img src="https://lovable-candy-d2cbb7a913.media.strapiapp.com/cc1_normal_2f6638d23f.png" alt="Pudu CC1"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="prod-img-placeholder" style="display:none"><span class="ph-icon">🤖</span>Pudu CC1</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-origin">🇨🇳 Pudu Robotics · China / Robotec Solutions — São Paulo, SP</div>
+          <div class="prod-model">Pudu CC1</div>
+          <div class="prod-specs">500 mm largura · 700–1.000 m²/h · Tanque 15+15 L<br>Modos: varrição, esfregão, aspiração carpete, mop<br>Clientes: Nubank, Condor, Itaú — suporte técnico local</div>
+          <div class="prod-price-box purple">
+            <div>
+              <div class="prod-price-label">Menor preço encontrado</div>
+              <div class="prod-price-value purple">R$ 114.300</div>
+            </div>
+            <div class="prod-price-note">CC1 R$ 99k + Work Station R$ 15,3k</div>
+          </div>
+          <a href="https://robotecsolutions.com/robos/cc1" target="_blank" class="prod-link purple">Ver produto →</a>
+        </div>
+      </div>
+      <!-- Pudu CC1 Pro -->
+      <div class="prod-card">
+        <div class="prod-img-wrap">
+          <img src="https://lovable-candy-d2cbb7a913.media.strapiapp.com/cc1_azul_ia_cea3d98e7b.png" alt="Pudu CC1 Pro"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="prod-img-placeholder" style="display:none"><span class="ph-icon">🤖</span>Pudu CC1 Pro</div>
+        </div>
+        <div class="prod-body">
+          <div class="prod-origin">🇨🇳 Pudu Robotics · China / Robotec Solutions — São Paulo, SP</div>
+          <div class="prod-model">Pudu CC1 Pro</div>
+          <div class="prod-specs">500 mm largura · 500 m²/h constante · Tanque 15+15 L<br>IA: detecção de manchas, troca de água automatizada<br>Base auto-higienizante · LiDAR + Visão Computacional</div>
+          <div class="prod-price-box purple">
+            <div>
+              <div class="prod-price-label">Menor preço encontrado</div>
+              <div class="prod-price-value purple">R$ 134.300</div>
+            </div>
+            <div class="prod-price-note">CC1 Pro R$ 109k + Work Station R$ 15,3k</div>
+          </div>
+          <a href="https://robotecsolutions.com/robos/cc1-pro" target="_blank" class="prod-link purple">Ver produto →</a>
+        </div>
+      </div>
+
+    </div><!-- /prod-grid T3 -->
+
+    <!-- Realidade das máquinas autônomas no Brasil -->
+    <div class="card" style="margin-top:8px;">
+      <h3>🤖 Máquinas Autônomas no Brasil: Realidade Atual</h3>
+      <p>A automação da limpeza de pisos está em estágio inicial, mas com adoção acelerada em grandes operações. O mercado global de robôs de limpeza profissional foi avaliado em US$ 2,5 bilhões em 2020 e cresce a ~23% ao ano (Grand View Research). No Brasil, a chegada acontece agora — e as primeiras unidades já operam em campo.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0;">
+        <div style="background:#f5f0ff;border-left:4px solid #6c3fc5;padding:14px 16px;border-radius:0 8px 8px 0;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.8px;color:#6c3fc5;margin-bottom:8px;">PRESENÇA NO BRASIL</div>
+          <ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.9;">
+            <li><strong>Kärcher KIRA B 50</strong> — rede comercial e suporte técnico oficiais no Brasil via Kärcher Center</li>
+            <li><strong>Pudu CC1 / CC1 Pro</strong> — distribuidor oficial Robotec Solutions (SP) com suporte técnico local, clientes como Nubank, Condor e Itaú</li>
+            <li><strong>Kaibot (Kunber)</strong> — empresa brasileira lançada em mai/2024, com foco em facilities e limpeza profissional</li>
+            <li><strong>Nilfisk Liberty SC50/SC60</strong> — disponível via distribuidores, com certificação por normas brasileiras de segurança</li>
+          </ul>
+        </div>
+        <div style="background:#f0f7ff;border-left:4px solid #2e7dd1;padding:14px 16px;border-radius:0 8px 8px 0;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.8px;color:#2e7dd1;margin-bottom:8px;">ONDE JÁ SE USA NO BRASIL</div>
+          <ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.9;">
+            <li><strong>Nubank</strong> — escritórios corporativos com operação de aspiração e mopeamento via Pudu CC1</li>
+            <li><strong>Condor Supermercados</strong> — varrição e lavagem autônoma em loja via Pudu CC1</li>
+            <li><strong>Itaú</strong> — data centers com limpeza de brilho e polimento via Pudu CC1</li>
+            <li><strong>Hospital Albert Einstein</strong> — robôs Robotec em operação logística e de serviços internos</li>
+            <li><strong>Shoppings, aeroportos e galpões</strong> — operação noturna contínua em ambientes de alto tráfego</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="background:#fff8e1;border:1px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:16px;">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.8px;color:#b87a00;margin-bottom:8px;">💰 QUEM SE BENEFICIA — PELO CUSTO DE AQUISIÇÃO</div>
+        <p style="font-size:13px;margin:0 0 10px;">Com o Pudu CC1 a <strong>R$ 114.300</strong> e o Kärcher KIRA a ~US$ 40–60k, já é possível automatizar operações de médio e grande porte. O perfil ideal:</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;font-size:12.5px;">
+          <div style="background:#fff;border-radius:6px;padding:10px 12px;border:1px solid #f0e08a;">
+            <div style="font-weight:700;margin-bottom:4px;color:#5a4000;">📐 Área mínima viável</div>
+            Operações com <strong>5.000+ m²</strong> de uso contínuo ou múltiplos turnos — onde o robô substitui 2–3 operadores por turno
+          </div>
+          <div style="background:#fff;border-radius:6px;padding:10px 12px;border:1px solid #f0e08a;">
+            <div style="font-weight:700;margin-bottom:4px;color:#5a4000;">🔄 Perfil de operação</div>
+            Funcionamento <strong>24h ou em horários nobres</strong> (feriados, madrugada) onde o custo de mão de obra é mais alto e a retenção é difícil
+          </div>
+          <div style="background:#fff;border-radius:6px;padding:10px 12px;border:1px solid #f0e08a;">
+            <div style="font-weight:700;margin-bottom:4px;color:#5a4000;">📊 Payback estimado</div>
+            Substituindo 2 operadores a R$ 3.000/mês cada: <strong>~3,5 a 5 anos</strong> de retorno, com redução adicional de insumos e turnover
+          </div>
+        </div>
+      </div>
+
+      <div class="insight">
+        A barreira de entrada é mais acessível do que parece: com o Pudu CC1 a R$ 114.300, já é possível automatizar operações de médio porte. O diferencial competitivo está no suporte local — a Robotec Solutions mantém engenheiros em SP, RJ, BH, Fortaleza e Goiânia. Para grandes operações, o CC1 Pro com IA e troca de água automatizada entrega o menor custo de intervenção humana do mercado brasileiro hoje.
+      </div>
+    </div>
+
+    <!-- Mapa de posicionamento -->
+    <div class="card" style="margin-top:8px;">
+      <h3>Mapa de Posicionamento por Modalidade</h3>
+      <p style="margin-bottom:14px;font-size:13.5px;">Eixo: Complexidade tecnológica × Investimento necessário</p>
+      <div style="display:flex;gap:0;flex-wrap:wrap;align-items:stretch;">
+        <div style="background:#2e7dd1;color:#fff;border-radius:8px 0 0 8px;padding:14px 20px;font-size:13px;min-width:180px;flex:1;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;opacity:0.8;margin-bottom:6px;">TIER 1</div>
+          <strong>Com Fio (Elétrico)</strong><br>
+          <span style="font-size:12px;opacity:0.85;line-height:1.6;">a partir de R$ 13.601<br>Kärcher BD 50/50 C · Artlav AL450E · IPC CT50 Cabo · Lavor Free Evo 50E</span>
+        </div>
+        <div style="background:#27ae60;color:#fff;padding:14px 20px;font-size:13px;min-width:200px;flex:1.2;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;opacity:0.8;margin-bottom:6px;">TIER 2</div>
+          <strong>Sem Fio (Bateria)</strong><br>
+          <span style="font-size:12px;opacity:0.85;line-height:1.6;">a partir de R$ 24.299<br>Nilfisk SC500 · IPC CT50 Bat · Lavor Free Evo 50B · Artlav AL450B · SAS Noblelift LPP530</span>
+        </div>
+        <div style="background:#6c3fc5;color:#fff;border-radius:0 8px 8px 0;padding:14px 20px;font-size:13px;min-width:180px;flex:1;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;opacity:0.8;margin-bottom:6px;">TIER 3</div>
+          <strong>Autônomos (Robôs)</strong><br>
+          <span style="font-size:12px;opacity:0.85;line-height:1.6;">a partir de R$ 114.300<br>Kärcher KIRA B 50 · Pudu CC1 · Pudu CC1 Pro · Kaibot (Kunber)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight">
+      A abordagem por modalidade de alimentação reflete melhor o critério de compra real das empresas. Modelos com fio (Tier 1) oferecem menor custo de entrada e manutenção simplificada, sendo ideais para áreas com tomadas acessíveis. Modelos a bateria (Tier 2) entregam mobilidade total e maior flexibilidade operacional, com custo adicional justificado em contratos de facilities de médio a grande porte. Autônomos (Tier 3) ainda exigem investimento elevado, mas crescem com a automação nos contratos de limpeza.
+    </div>
+
+  </div>
+
+  <!-- ══════════════ SEÇÃO 3 – MERCADO E CANAIS ══════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon">🎯</div>
+      <div>
+        <div class="section-number">Seção 03</div>
+        <h2>Mercado, Canais e Regulação</h2>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Quem compra ou aluga esse equipamento no Brasil?</h3>
+      <p>Os clientes são empresas e instituições que precisam limpar grandes áreas planas de forma eficiente, contínua e com baixo custo operacional. O perfil varia do comprador direto (empresa que internaliza a operação) ao intermediário (empresa de facilities que presta serviços para terceiros).</p>
+    </div>
+
+    <div class="sector-grid" style="margin-top:20px;">
+      <div class="sector-card">
+        <div class="sector-icon">🛒</div>
+        <h4>Supermercados e Hipermercados</h4>
+        <p>Redes como Carrefour, Grupo Pão de Açúcar, Atacadão, Assaí. Limpeza durante e após funcionamento, sem interromper o fluxo de clientes.</p>
+        <span class="priority high">Alta prioridade</span>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">🏭</div>
+        <h4>Indústrias e Fábricas</h4>
+        <p>Metalúrgicas, alimentícias, farmacêuticas, têxteis. Limpeza de chão de fábrica, corredores e depósitos com alta frequência.</p>
+        <span class="priority high">Alta prioridade</span>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">📦</div>
+        <h4>Logística e Galpões</h4>
+        <p>Centros de distribuição, fulfillment centers (Amazon, Mercado Livre), operadores logísticos. Grandes áreas, alta demanda.</p>
+        <span class="priority high">Alta prioridade</span>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">🏥</div>
+        <h4>Hospitais e Clínicas</h4>
+        <p>Higienização rigorosa de corredores, salas e áreas de circulação. Exigência de conformidade com normas sanitárias e ANVISA.</p>
+        <span class="priority high">Alta prioridade</span>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">🛍️</div>
+        <h4>Shopping Centers</h4>
+        <p>Áreas comuns, praças de alimentação, estacionamentos internos. Operação noturna ou em horários de menor movimento.</p>
+        <span class="priority med">Média prioridade</span>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">✈️</div>
+        <h4>Aeroportos e Terminais</h4>
+        <p>Alta demanda de limpeza contínua em áreas de embarque, desembarque e corredores de grande fluxo. Operação 24h.</p>
+        <span class="priority med">Média prioridade</span>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">🏫</div>
+        <h4>Educação e Corporativo</h4>
+        <p>Universidades, escolas técnicas, escritórios e data centers. Limpeza regular em pisos vinílicos, porcelanatos e carpetes.</p>
+        <span class="priority med">Média prioridade</span>
+      </div>
+      <div class="sector-card">
+        <div class="sector-icon">🧹</div>
+        <h4>Empresas de Facilities</h4>
+        <p>Grupo GPS, Sodexo, ISS, Multiservice. Canal indireto — prestam serviços de limpeza para terceiros, adquirindo ou alugando frotas.</p>
+        <span class="priority high">Alta prioridade</span>
+      </div>
+    </div>
+
+    <div class="insight">
+      O mercado de locação de lavadoras de piso está em forte expansão no Brasil: empresas de facilities, serviços de limpeza e grandes redes varejistas preferem alugar ao invés de comprar — especialmente para projetos de curto prazo ou para avaliar o equipamento antes da aquisição. O modelo de locação mensal (R$ 1.500–R$ 4.000/mês dependendo do modelo) abre um canal relevante para distribuidores com capital de giro.
+    </div>
+
+    <div class="insight">
+      O segmento B2B é dominante: o produto praticamente não tem mercado residencial relevante. A estratégia de go-to-market deve priorizar empresas de facilities (canal indireto) e grandes operações industriais e varejistas (canal direto). Feiras setoriais como a Limpetec e Fispal são canais importantes de geração de leads qualificados no Brasil.
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <h3>Canal de Aquisição</h3>
+      <p>O mercado brasileiro opera principalmente via distribuidores regionais e representantes comerciais autorizados. Compras diretas do fabricante são raras para PMEs — concentradas em grandes contratos corporativos ou licitações públicas. O e-commerce (Loja do Mecânico, Mercado Livre) tem ganhado relevância para modelos de até R$ 30.000, especialmente pós-pandemia.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:16px;font-size:13px;">
+        <div style="background:#eef4fd;border-radius:8px;padding:12px 14px;">
+          <div style="font-weight:700;color:#2e7dd1;margin-bottom:6px;">🏪 Distribuidores</div>
+          Canal principal. Margens de 20–35%. Suporte técnico e pós-venda incluídos. Exemplos: NC Bella, Simpla Lavadoras, Robotec Solutions.
+        </div>
+        <div style="background:#edfbf3;border-radius:8px;padding:12px 14px;">
+          <div style="font-weight:700;color:#27ae60;margin-bottom:6px;">🛒 E-commerce</div>
+          Crescimento acelerado. Loja do Mecânico, Amazon BR, Mercado Livre. Adequado para modelos de entrada e médio porte (até R$ 30k).
+        </div>
+        <div style="background:#f5f0fb;border-radius:8px;padding:12px 14px;">
+          <div style="font-weight:700;color:#6c3fc5;margin-bottom:6px;">🤝 Venda Direta</div>
+          Grandes contratos B2B e licitações públicas. Marcas com presença local (Kärcher, IPC Brasil, Robotec Solutions) operam neste modelo.
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:20px;">
+      <h3>Cenário Regulatório</h3>
+      <p>O Brasil exige certificação INMETRO para equipamentos elétricos de uso profissional. Modelos importados precisam de homologação antes de serem comercializados. A NR-12 (segurança em máquinas e equipamentos) é relevante para operações industriais e deve ser observada na seleção do equipamento.</p>
+      <div class="insight">
+        <strong>Atenção:</strong> A certificação INMETRO é pré-requisito legal para vender no Brasil — sem ela, o produto não pode ser comercializado, exposto em feiras ou importado de forma regular. Marcas como Artlav (fabricação nacional) e IPC Brasil (importador oficial) já possuem os registros necessários. Para marcas novas ou distribuidores independentes, o prazo de homologação pode levar de 3 a 12 meses.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>📚 Fontes e Referências</h3>
+      <ul class="ref-list">
+        <li><span class="ref-num">[1]</span> <a href="https://www.grandviewresearch.com/industry-analysis/floor-scrubber-market" target="_blank">Grand View Research – Floor Scrubber Market Size & Forecast</a></li>
+        <li><span class="ref-num">[2]</span> <a href="https://www.karcher.com.br/br/sobre-a-karcher/empresa/noticias/primeira-limpadora-e-secadora-de-pisos-100-autonoma.html" target="_blank">Kärcher Brasil – KIRA B 50 Lançamento Oficial</a></li>
+        <li><span class="ref-num">[3]</span> <a href="https://karcher-center-altex.com.br/produto/lavadora-e-secadora-de-piso-karcher-bd-50-50-c-classic-48345" target="_blank">Kärcher Center Altex – BD 50/50 C</a></li>
+        <li><span class="ref-num">[4]</span> <a href="https://www.ncbelladistribuidora.com.br/lavadora-automatica-de-pisos-eletrica-disco-450-450e-artlav" target="_blank">NC Bella Distribuidora – Artlav AL450E</a></li>
+        <li><span class="ref-num">[5]</span> <a href="https://www.ncbelladistribuidora.com.br/lavadora-de-piso-automatica-a-bateria-disco-510-al-450-artlav" target="_blank">NC Bella Distribuidora – Artlav AL450 Bateria</a></li>
+        <li><span class="ref-num">[6]</span> <a href="https://loja.ipcbrasil.com.br/" target="_blank">IPC Brasil – Loja Oficial CT50</a></li>
+        <li><span class="ref-num">[7]</span> <a href="https://nilfisk.com.br/lavadoras-de-pisos/lavadora-de-pisos-compacta-sc500/" target="_blank">Nilfisk Brasil – SC500 REV</a></li>
+        <li><span class="ref-num">[10]</span> <a href="https://www.lojadomecanico.com.br/produto/608387/22/247/lavadora-e-secadora-de-pisos-free-evo-50e-eletrica-800mm-220v-lavor-b85270003" target="_blank">Loja do Mecânico – Lavor Free Evo 50E</a></li>
+        <li><span class="ref-num">[11]</span> <a href="https://www.lojadomecanico.com.br/produto/608386/22/247/lavadora-e-secadora-de-pisos-free-evo-45e-450mm-800w-220v-lavor-b85270004" target="_blank">Loja do Mecânico – Lavor Free Evo 50B</a></li>
+        <li><span class="ref-num">[12]</span> <a href="https://robotecsolutions.com/robos/cc1" target="_blank">Robotec Solutions – Pudu CC1 Robô de Limpeza Comercial</a></li>
+        <li><span class="ref-num">[13]</span> <a href="https://robotecsolutions.com/robos/cc1-pro" target="_blank">Robotec Solutions – Pudu CC1 Pro Robô de Limpeza com IA</a></li>
+        <li><span class="ref-num">[14]</span> <a href="https://revistahigiplus.abralimp.org.br/robos-na-operacao-da-limpeza-profissional-a-revolucao-chegou-ao-brasil-e-fala-portugues/" target="_blank">ABRALIMP Revista Higiplus – Robôs na Limpeza Profissional no Brasil</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+
+<footer>
+  Documento gerado em <strong>maio de 2026</strong> · Inteligência de Mercado · Lavadora e Secadora de Pisos Industrial/Profissional · Baseado em fontes públicas disponíveis até a data de emissão.
+</footer>
+
+</body>
+</html>
