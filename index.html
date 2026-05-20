@@ -409,6 +409,119 @@
     .tier-header.green  .tier-badge { background: #27ae60; }
     .tier-header.purple .tier-badge { background: #6c3fc5; }
     .tier-title { font-size: 18px; font-weight: 800; }
+    /* ── Tier 2 highlight wrapper ── */
+    .tier2-highlight {
+      position: relative;
+      border: 3px solid #27ae60;
+      border-radius: 18px;
+      padding: 24px 24px 28px;
+      margin: 24px 0 32px;
+      background: linear-gradient(135deg, #f0fdf6 0%, #ffffff 60%);
+      box-shadow: 0 0 0 6px rgba(39,174,96,0.10), 0 8px 32px rgba(39,174,96,0.13);
+    }
+    .tier2-highlight-label {
+      position: absolute;
+      top: -16px;
+      left: 28px;
+      background: #27ae60;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 18px;
+      border-radius: 20px;
+      box-shadow: 0 2px 10px rgba(39,174,96,0.35);
+    }
+    .tier2-highlight .tier-header { margin-top: 8px; }
+    /* ── Blips Featured Card ── */
+    .blips-featured {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      align-items: stretch;
+      gap: 0;
+      border: 2px solid #F5A500;
+      box-shadow: 0 4px 24px rgba(245,165,0,0.18);
+      position: relative;
+      overflow: visible;
+    }
+    .blips-ribbon {
+      position: absolute;
+      top: -13px; right: 20px;
+      background: #F5A500;
+      color: #fff;
+      font-size: 11px; font-weight: 800;
+      letter-spacing: 1.2px; text-transform: uppercase;
+      padding: 4px 16px; border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(245,165,0,0.4);
+    }
+    .blips-featured .prod-img-wrap {
+      width: 240px; min-width: 200px; flex-shrink: 0;
+      border-radius: 14px 0 0 14px;
+    }
+    .blips-featured .prod-img-wrap img { border-radius: 14px 0 0 14px; }
+    .blips-featured .prod-body { flex: 1; padding: 20px 24px; }
+    .blips-logo-row {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 10px;
+    }
+    .blips-financials {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6px 20px;
+      background: #fffbf0;
+      border: 1px solid #f5e0a0;
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 10px 0 12px;
+      font-size: 12.5px;
+    }
+    .blips-fin-row {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 8px;
+    }
+    .fin-label { color: #7a6020; font-weight: 600; }
+    .fin-value { font-weight: 700; color: #3a2a00; }
+    .blips-fin-row.highlight .fin-label { color: #1a5c35; font-size: 13px; }
+    .blips-fin-row.highlight .fin-value { color: #1a7a4a; font-size: 15px; font-weight: 800; }
+    .blips-fin-row.neuron { grid-column: 1 / -1; background: #f0f7ff; border-radius: 7px; padding: 5px 10px; }
+    .blips-fin-row.neuron .fin-label { color: #2e5a8a; }
+    .blips-fin-row.neuron .fin-value { color: #1a4a7a; font-style: italic; }
+    /* ── Comparison Table ── */
+    .tier2-compare {
+      margin-top: 28px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #c8e6c9;
+    }
+    .tier2-compare-title {
+      background: #27ae60;
+      color: #fff;
+      font-size: 13px; font-weight: 700;
+      padding: 10px 18px;
+      letter-spacing: 0.5px;
+    }
+    .tier2-compare table {
+      width: 100%; border-collapse: collapse;
+      font-size: 12.5px;
+    }
+    .tier2-compare th {
+      background: #edfbf3; color: #1a5c35;
+      padding: 9px 12px; text-align: left;
+      font-weight: 700; border-bottom: 2px solid #c8e6c9;
+      white-space: nowrap;
+    }
+    .tier2-compare td {
+      padding: 8px 12px; border-bottom: 1px solid #e8f5e9;
+      color: #333; vertical-align: middle;
+    }
+    .tier2-compare tr:last-child td { border-bottom: none; }
+    .tier2-compare tr.blips-row { background: #fffbf0; }
+    .tier2-compare tr.blips-row td { font-weight: 600; }
+    .tier2-compare tr:hover td { background: #f1fdf5; }
+    .cmp-price-green { color: #1a7a4a; font-weight: 700; }
+    .cmp-badge { display:inline-block; font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px; }
+    .cmp-badge.gold { background:#F5A500; color:#fff; }
+    .cmp-badge.green { background:#27ae60; color:#fff; }
     .tier-desc {
       border-left: 4px solid;
       border-radius: 0 12px 12px 0;
@@ -605,6 +718,8 @@
     </div><!-- /prod-grid T1 -->
 
     <!-- ── TIER 2: BATERIA ── -->
+    <div class="tier2-highlight">
+      <div class="tier2-highlight-label">⭐ RECOMENDADO</div>
     <div class="tier-header green">
       <div class="tier-badge">Tier 2 · Sem Fio</div>
       <h3 class="tier-title">🔋 Lavadoras a Bateria</h3>
@@ -614,6 +729,47 @@
     </div>
 
     <div class="prod-grid prod-grid-3">
+
+      <!-- Blips B50 — DESTAQUE CUSTO-BENEFÍCIO -->
+      <div class="prod-card blips-featured">
+        <div class="prod-img-wrap">
+          <img src="https://image.made-in-china.com/2f0j00nZUbkBoqZzgY/B50-Cordless-Tile-Cleaning-Machine-Wet-and-Dry-Battery-Electric-Floor-Scrubber.jpg" alt="Blips B50"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="prod-img-placeholder" style="display:none"><span class="ph-icon">🧹</span>Blips B50</div>
+        </div>
+        <div class="prod-body">
+          <div class="blips-logo-row">
+            <svg viewBox="0 0 130 38" xmlns="http://www.w3.org/2000/svg" style="height:30px;width:auto;flex-shrink:0">
+          <circle cx="19" cy="19" r="19" fill="#F5A500"/>
+          <text x="8" y="28" font-family="Arial Black,Arial,sans-serif" font-size="24" font-weight="900" fill="white">b</text>
+          <text x="44" y="27" font-family="Arial,sans-serif" font-size="19" font-weight="700" letter-spacing="-0.5" fill="#111">blips</text>
+          <circle cx="69" cy="8" r="3.2" fill="#F5A500"/>
+        </svg>
+            <div style="font-size:11px;color:#7a6020;font-weight:600;">Importação direta · White Label China</div>
+          </div>
+          <div class="prod-origin">🇨🇳 Fabricado na China (AMETEK Vacuum Motor) / Blips — Brasil</div>
+          <div class="prod-model">Blips B50 — Walk-Behind Floor Scrubber</div>
+          <div class="prod-specs">510 mm disco · 2.000 m²/h · Tanque 55L + 60L rec.<br>Bateria 24V/100Ah · Motor escova 500W · Motor vácuo AMETEK 500W<br>Autonomia 3–4 h · Dim: 1.400×850×1.050 mm · Peso: 180 kg</div>
+          <div class="blips-financials">
+            <div class="blips-fin-row">
+              <span class="fin-label">💵 Custo FOB (US$ 800,00) + Impostos</span>
+              <span class="fin-value">R$ 6.360,00</span>
+            </div>
+            <div class="blips-fin-row highlight">
+              <span class="fin-label">🏷️ Preço de Venda</span>
+              <span class="fin-value">R$ 14.200,00</span>
+            </div>
+            <div class="blips-fin-row">
+              <span class="fin-label">📊 Margem CMV</span>
+              <span class="fin-value">45%</span>
+            </div>
+            <div class="blips-fin-row neuron">
+              <span class="fin-label">🤖 Neuronizável</span>
+              <span class="fin-value">Pendente de confirmação · Alta probabilidade de viabilidade</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Nilfisk SC500 REV -->
       <div class="prod-card">
@@ -724,6 +880,82 @@
       </div>
 
         </div><!-- /prod-grid T2 -->
+
+    <!-- ── Tabela Comparativa Tier 2 ── -->
+    <div class="tier2-compare">
+      <div class="tier2-compare-title">📊 Comparativo Tier 2 · Lavadoras a Bateria</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Modelo</th>
+            <th>Largura</th>
+            <th>Produtividade</th>
+            <th>Tanque (L+L)</th>
+            <th>Bateria</th>
+            <th>Autonomia</th>
+            <th>Preço</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="blips-row">
+            <td><span class="cmp-badge gold">⭐ BLIPS</span> Blips B50</td>
+            <td>510 mm</td>
+            <td>2.000 m²/h</td>
+            <td>55 + 60 L</td>
+            <td>24V / 100Ah</td>
+            <td>3 – 4 h</td>
+            <td class="cmp-price-green">R$ 14.200 <span style="font-size:10px;color:#7a6020;">(venda)</span></td>
+          </tr>
+          <tr>
+            <td>SAS Noblelift LPP530</td>
+            <td>530 mm</td>
+            <td>1.800 m²/h</td>
+            <td>50 + 50 L</td>
+            <td>24V / 100Ah Li</td>
+            <td>3 – 4 h</td>
+            <td class="cmp-price-green">R$ 19.791</td>
+          </tr>
+          <tr>
+            <td>IPC CT50 Bateria</td>
+            <td>500 mm</td>
+            <td>2.200 m²/h</td>
+            <td>—</td>
+            <td>24V</td>
+            <td>—</td>
+            <td class="cmp-price-green">R$ 23.336</td>
+          </tr>
+          <tr>
+            <td>Lavor Free Evo 50B</td>
+            <td>500 mm</td>
+            <td>2.000 m²/h</td>
+            <td>45 + 50 L</td>
+            <td>24V</td>
+            <td>até 3 h</td>
+            <td class="cmp-price-green">R$ 24.299</td>
+          </tr>
+          <tr>
+            <td>Artlav AL450 Bateria</td>
+            <td>510 mm</td>
+            <td>1.650 m²/h</td>
+            <td>45 + 50 L</td>
+            <td>24V / 130Ah</td>
+            <td>—</td>
+            <td class="cmp-price-green">R$ 30.511</td>
+          </tr>
+          <tr>
+            <td>Nilfisk SC500 REV</td>
+            <td>500 mm</td>
+            <td>Orbital (1 passagem)</td>
+            <td>—</td>
+            <td>24V</td>
+            <td>—</td>
+            <td class="cmp-price-green">R$ 50.095</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    </div><!-- /tier2-highlight -->
 
     <!-- ── TIER 3: AUTÔNOMOS ── -->
     <div class="tier-header purple">
