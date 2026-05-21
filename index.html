@@ -529,6 +529,111 @@
       font-size: 13.5px;
       margin-bottom: 16px;
     }
+
+    /* ══════════════ MOBILE RESPONSIVE ══════════════ */
+    @media (max-width: 768px) {
+      header { padding: 28px 18px 24px; }
+      header h1 { font-size: 26px; }
+      header .meta { gap: 10px; }
+      .container { padding: 28px 18px; }
+    }
+
+    @media (max-width: 600px) {
+      /* ── Base ── */
+      body { font-size: 14px; }
+      .container { padding: 18px 12px; }
+
+      /* ── Header ── */
+      header { padding: 20px 14px 18px; }
+      header h1 { font-size: 19px; line-height: 1.25; }
+      header p { font-size: 12.5px; max-width: 100%; }
+      header .label { font-size: 10px; }
+      header .meta { flex-direction: column; gap: 8px; margin-top: 16px; }
+      header .meta-item { padding: 8px 12px; font-size: 12px; }
+      header .meta-item strong { font-size: 14px; }
+
+      /* ── Section ── */
+      .section { margin-bottom: 36px; }
+      .section-header h2 { font-size: 17px; }
+      .section-icon { width: 32px; height: 32px; font-size: 15px; border-radius: 8px; }
+      .section-number { font-size: 10px; }
+
+      /* ── Cards ── */
+      .card { padding: 14px 14px; }
+      .card h3 { font-size: 14px; }
+
+      /* ── Tier badges / titles ── */
+      .tier-header { gap: 8px; margin: 20px 0 10px; }
+      .tier-title { font-size: 14px; }
+      .tier-badge { font-size: 10px; padding: 4px 10px; }
+      .tier-desc { padding: 10px 14px; font-size: 13px; }
+
+      /* ── Tier 2 highlight wrapper ── */
+      .tier2-highlight { padding: 16px 10px 18px; margin: 16px 0 24px; }
+      .tier2-highlight-label { font-size: 10px; padding: 4px 12px; left: 12px; top: -14px; }
+
+      /* ── BLIPS FEATURED: stack vertically on mobile ── */
+      .blips-featured {
+        flex-direction: column !important;
+      }
+      .blips-featured .prod-img-wrap {
+        width: 100% !important;
+        min-width: unset !important;
+        height: 190px !important;
+        border-radius: 14px 14px 0 0 !important;
+      }
+      .blips-featured .prod-img-wrap img {
+        border-radius: 0 !important;
+        max-height: 170px !important;
+      }
+      .blips-featured .prod-body { padding: 14px 14px; }
+
+      /* ── Blips financials: 1 column ── */
+      .blips-financials {
+        grid-template-columns: 1fr !important;
+        font-size: 12px;
+        padding: 10px 12px;
+      }
+      .blips-fin-row.neuron { grid-column: 1 !important; }
+      .blips-logo-row { gap: 8px; }
+
+      /* ── Comparison table: horizontal scroll ── */
+      .tier2-compare {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+      }
+      .tier2-compare table { min-width: 480px; font-size: 11.5px; }
+      .tier2-compare th, .tier2-compare td { padding: 7px 8px; }
+
+      /* ── Prod cards ── */
+      .prod-img-wrap { height: 150px; }
+      .prod-model { font-size: 14px; }
+      .prod-price-value { font-size: 16px; }
+
+      /* ── Stat boxes ── */
+      .stat-box .stat-value { font-size: 22px; }
+
+      /* ── Sector grid: 1 column ── */
+      .sector-grid { grid-template-columns: 1fr !important; }
+
+      /* ── Inline utility grids: 1 column override ── */
+      .mob-col { grid-template-columns: 1fr !important; }
+
+      /* ── Positioning map: stack ── */
+      .pos-bar { flex-direction: column !important; }
+      .pos-bar > div:first-child { border-radius: 8px 8px 0 0 !important; }
+      .pos-bar > div:nth-child(2) { border-radius: 0 !important; }
+      .pos-bar > div:last-child { border-radius: 0 0 8px 8px !important; }
+
+      /* ── Cert items ── */
+      .cert-item { padding: 14px 14px; }
+
+      /* ── Insight box ── */
+      .insight { font-size: 13px; padding: 12px 14px; }
+
+      /* ── Footer ── */
+      footer { padding: 18px 14px; font-size: 11px; }
+    }
   </style>
 </head>
 <body>
@@ -1062,7 +1167,7 @@
       <h3>🤖 Máquinas Autônomas no Brasil: Realidade Atual</h3>
       <p>A automação da limpeza de pisos está em estágio inicial, mas com adoção acelerada em grandes operações. O mercado global de robôs de limpeza profissional foi avaliado em US$ 2,5 bilhões em 2020 e cresce a ~23% ao ano (Grand View Research). No Brasil, a chegada acontece agora — e as primeiras unidades já operam em campo.</p>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0;">
+      <div class="mob-col" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0;">
         <div style="background:#f5f0ff;border-left:4px solid #6c3fc5;padding:14px 16px;border-radius:0 8px 8px 0;">
           <div style="font-size:11px;font-weight:700;letter-spacing:0.8px;color:#6c3fc5;margin-bottom:8px;">PRESENÇA NO BRASIL</div>
           <ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.9;">
@@ -1087,7 +1192,7 @@
       <div style="background:#fff8e1;border:1px solid #f9a825;border-radius:8px;padding:14px 18px;margin-bottom:16px;">
         <div style="font-size:11px;font-weight:700;letter-spacing:0.8px;color:#b87a00;margin-bottom:8px;">💰 QUEM SE BENEFICIA — PELO CUSTO DE AQUISIÇÃO</div>
         <p style="font-size:13px;margin:0 0 10px;">Com o Pudu CC1 a <strong>R$ 114.300</strong> e o Kärcher KIRA a ~US$ 40–60k, já é possível automatizar operações de médio e grande porte. O perfil ideal:</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;font-size:12.5px;">
+        <div class="mob-col" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;font-size:12.5px;">
           <div style="background:#fff;border-radius:6px;padding:10px 12px;border:1px solid #f0e08a;">
             <div style="font-weight:700;margin-bottom:4px;color:#5a4000;">📐 Área mínima viável</div>
             Operações com <strong>5.000+ m²</strong> de uso contínuo ou múltiplos turnos — onde o robô substitui 2–3 operadores por turno
@@ -1112,7 +1217,7 @@
     <div class="card" style="margin-top:8px;">
       <h3>Mapa de Posicionamento por Modalidade</h3>
       <p style="margin-bottom:14px;font-size:13.5px;">Eixo: Complexidade tecnológica × Investimento necessário</p>
-      <div style="display:flex;gap:0;flex-wrap:wrap;align-items:stretch;">
+      <div class="pos-bar" style="display:flex;gap:0;flex-wrap:wrap;align-items:stretch;">
         <div style="background:#2e7dd1;color:#fff;border-radius:8px 0 0 8px;padding:14px 20px;font-size:13px;min-width:180px;flex:1;">
           <div style="font-size:10px;font-weight:700;letter-spacing:1px;opacity:0.8;margin-bottom:6px;">TIER 1</div>
           <strong>Com Fio (Elétrico)</strong><br>
@@ -1214,7 +1319,7 @@
     <div class="card" style="margin-top:20px;">
       <h3>Canal de Aquisição</h3>
       <p>O mercado brasileiro opera principalmente via distribuidores regionais e representantes comerciais autorizados. Compras diretas do fabricante são raras para PMEs — concentradas em grandes contratos corporativos ou licitações públicas. O e-commerce (Loja do Mecânico, Mercado Livre) tem ganhado relevância para modelos de até R$ 30.000, especialmente pós-pandemia.</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:16px;font-size:13px;">
+      <div class="mob-col" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:16px;font-size:13px;">
         <div style="background:#eef4fd;border-radius:8px;padding:12px 14px;">
           <div style="font-weight:700;color:#2e7dd1;margin-bottom:6px;">🏪 Distribuidores</div>
           Canal principal. Margens de 20–35%. Suporte técnico e pós-venda incluídos. Exemplos: NC Bella, Simpla Lavadoras, Robotec Solutions.
